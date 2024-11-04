@@ -128,22 +128,22 @@
             },
             "proportion": {
                 "type": "number",
-                "description": "proportion value for "-M" gametes command,
+                "description": "proportion value for '-M' gametes command",
                 "meta": ["proportion"]
             }, 
             "quantile_counts": {
                 "type": "number",
-                "description": "The number of random model architectures to save to the model output file (gametes),
+                "description": "The number of random model architectures to save to the model output file (Gametes)",
                 "meta": ["quantile_counts"]
             }, 
             "population_counts": {
                 "type": "number",
-                "description": "The number random model architectures GAMETES to try and generate for the given model constraints,
+                "description": "The number random model architectures GAMETES to try and generate for the given model constraints",
                 "meta": ["population_counts"]
             }, 
             "trycount": {
                 "type": "number",
-                "description": "The number of Gametes model generation attempts. Min value= 90000,
+                "description": "The number of Gametes model generation attempts. Min value= 90000",
                 "meta": ["trycount"]
             }, 
             "dataset": {
