@@ -7,18 +7,160 @@
     "items": {
         "type": "object",
         "properties": {
-            "sample": {
+            "simulation_model": {
                 "type": "string",
                 "pattern": "^\\S+$",
-                "errorMessage": "Sample name must be provided and cannot contain spaces",
-                "meta": ["id"]
+                "description": "model name to simulate",
+                "meta": ["simulation_model"]
             },
-            "fastq_1": {
+            "seed": {
+                "type": "number",
+                "description": "seed number"
+            },
+            "chromosome": {
+                "type": "number",
+                "description": "Human chromosome number"
+            },
+            "population": {
                 "type": "string",
-                "format": "file-path",
-                "exists": true,
-                "pattern": "^\\S+\\.f(ast)?q\\.gz$",
-                "errorMessage": "FastQ file for reads 1 must be provided, cannot contain spaces and must have extension '.fq.gz' or '.fastq.gz'"
+                "pattern": "^\\S+$",
+                "description": "Population ancestry among AFR (African), AMR (Admixed American), EAS (East Asian), EUR/CEU (European), CSA (Central or South Asian), MID (Middle Eastern): ",
+                "enum": ["AFR", "AMR", "EAS", "CEU", "CSA", "MID"],
+                "meta": ["population"]
+            },
+            "output_dir": {
+                "type": "string",
+                "pattern": "^\\S+$",
+                "description": "Name of the output directory",
+                "meta": ["output_dir"]
+            },
+            "output_prefix": {
+                "type": "string",
+                "pattern": "^\\S+$",
+                "description": "Prefix of the outputs",
+                "meta": ["output_prefix"]
+            }, 
+            "no_predictive_attributes": {
+                "type": "number",
+                "description": "Number of predictive variants to simulate",
+                "meta": ["no_predictive_attributes"]
+            }, 
+            "no_non_predictive_total_attributes": {
+                "type": "number",
+                "description": "Number of total variants within the VCF file to simulate",
+                "meta": ["no_non_predictive_total_attributes"]
+            }, 
+            "MAF_min_non_predictive_attributes": {
+                "type": "number",
+                "description": "Min value of AF for non predictive variants",
+                "meta": ["MAF_min_non_predictive_attributes"]
+            }, 
+            "MAF_max_non_predictive_attributes": {
+                "type": "number",
+                "description": "Max value of AF for non predictive variants",
+                "meta": ["MAF_max_non_predictive_attributes"]
+            }, 
+            "MAF_interacting_associates_attributes": {
+                "type": "number",
+                "description": "Max value of AF for simulated interacting variants",
+                "meta": ["MAF_interacting_associates_attributes"]
+            }, 
+            "no_cases": {
+                "type": "number",
+                "description": "Number of case samples",
+                "meta": ["no_cases"]
+            }, 
+            "no_controls": {
+                "type": "number",
+                "description": "Number of controls samples",
+                "meta": ["no_controls"]
+            }, 
+            "no_total_individuals": {
+                "type": "number",
+                "description": "Number of total samples",
+                "meta": ["no_total_individuals"]
+            }, 
+            "prevalence": {
+                "type": "number",
+                "description": "Fraction of people in a specified group at a given time featuring a variant or a disorder",
+                "meta": ["prevalence"]
+            }, 
+            "polygenicity": {
+                "type": "number",
+                "description": "The number of independently associated SNPs describing how the heritability of a trait is spread across the genom",
+                "meta": ["polygenicity"]
+            }, 
+            "pleiotropy": {
+                "type": "number",
+                "description": "Condition in which a single gene contributes to multiple phenotypic traits",
+                "meta": ["pleiotropy"]
+            }, 
+            "heritability": {
+                "type": "number",
+                "description": "The amount of phenotypic variation in a trait or disease that is attributable to genetic differences",
+                "meta": ["heritability"]
+            }, 
+            "no_replicates": {
+                "type": "number",
+                "description": "Number of dataset replicates",
+                "meta": ["no_replicates"]
+            }, 
+            "batchsize": {
+                "type": "number",
+                "description": "",
+                "meta": ["batchsize"]
+            }, 
+            "size": {
+                "type": "number",
+                "description": "",
+                "meta": ["size"]
+            }, 
+            "alpha": {
+                "type": "number",
+                "description": "risk witih",
+                "meta": ["alpha"]
+            }, 
+            "useOddsRatio": {
+                "type": "string",
+                "pattern": "^\\S+$",
+                "description": "Odds Ratio difficulty metrics. When not set, Gametes returns EDM difficulty metrics",
+                "meta": ["useOddsRatio"]
+            },
+            "proportion": {
+                "type": "number",
+                "description": "proportion value for "-M" gametes command,
+                "meta": ["proportion"]
+            }, 
+            "quantile_counts": {
+                "type": "number",
+                "description": "The number of random model architectures to save to the model output file (gametes),
+                "meta": ["quantile_counts"]
+            }, 
+            "population_counts": {
+                "type": "number",
+                "description": "The number random model architectures GAMETES to try and generate for the given model constraints,
+                "meta": ["population_counts"]
+            }, 
+            "trycount": {
+                "type": "number",
+                "description": "The number of Gametes model generation attempts. Min value= 90000,
+                "meta": ["trycount"]
+            }, 
+            "dataset": {
+                "type": "string",
+                "pattern": "^\\S+$",
+                "description": "Gametes command to create dataset",
+                "meta": ["dataset"]
+            },
+            "AF_min": {
+                "type": "number",
+                "description": "Min value of AF for predictive variants",
+                "meta": ["AF_min"]
+            }, 
+            "AF_max": {
+                "type": "number",
+                "description": "Max value of AF for predictive variants",
+                "meta": ["AF_max"]
             },
             "fastq_2": {
                 "type": "string",
@@ -28,6 +170,7 @@
                 "errorMessage": "FastQ file for reads 2 cannot contain spaces and must have extension '.fq.gz' or '.fastq.gz'"
             }
         },
-        "required": ["sample", "fastq_1"]
+        "required": ["simulation_model", "seed"]
     }
 }
+

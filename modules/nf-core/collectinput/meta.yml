@@ -1,0 +1,40 @@
+name: "collectinput"
+description: Module to collect the parameter settings and generate input files for each tool
+keywords:
+  - bash
+  - parameters
+  - genomics
+tools:
+  - "collectinput":
+      description: "Freely available tools for computational molecular biology."
+      homepage: "None"
+      documentation: "None"
+      tool_dev_url: "None"
+      doi: ""
+      licence: ['Biopython License Agreement']
+      identifier: 
+
+input:
+  - - meta:
+        type: map
+        description: |
+          Groovy Map containing sample information
+          e.g. `[ id:'sample1', single_end:false ]`
+  
+output:
+  - gametes:
+    - "*.txt"
+        type: file
+        description: csv file format 
+        pattern: "*.txt"
+          
+  - versions:
+    - "versions.yml":
+        type: file
+        description: File containing software versions
+        pattern: "versions.yml"
+
+authors:
+  - "@msantorsola"
+maintainers:
+  - "@msantorsola"

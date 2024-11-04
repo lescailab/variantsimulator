@@ -1,0 +1,87 @@
+nextflow_process {
+
+    name "Test Process COLLECTINPUT"
+    script "../main.nf"
+    process "COLLECTINPUT"
+
+    tag "modules"
+    tag "modules_nfcore"
+    tag "collectinput"
+
+    test("collectinput - meta with useOddsRatio") {
+
+        when {
+            process {
+                """
+                input[0] = [
+                    simulation_model: "test1",
+                    MAF_interacting_associates_attributes: 0.3,
+                    seed: 123,
+                    prevalence: 0.6,
+                    heritability: 0.3,
+                    useOddsRatio: true,
+                    quantile_counts: 2,
+                    population_counts: 10,
+                    trycount: 90000,
+                    proportion: 0.3
+                ]
+                """
+            }
+        }
+
+        then {
+            println "Debug: process.out = ${process.out}"
+            assertAll(
+                { assert process.success },
+                { assert process.out.gametes != null },
+                { assert process.out.gametes[0] != null },
+                { assert process.out.gametes[0][1] != null },
+                { assert path(process.out.gametes[0][1]).exists() },
+                { assert process.out.versions != null },
+                { assert process.out.versions[0] != null },
+                { assert path(process.out.versions[0]).exists() },
+                { assert snapshot(process.out.gametes[0][1].readLines()).match("params_with_useOddsRatio") },
+                { assert snapshot(process.out.versions[0].readLines()).match("versions") }
+            )
+        }
+    }
+
+    test("collectinput - meta without useOddsRatio") {
+
+        when {
+            process {
+                """
+                input[0] = [
+                    simulation_model: "test2",
+                    MAF_interacting_associates_attributes: 0.4,
+                    seed: 456,
+                    prevalence: 0.5,
+                    heritability: 0.4,
+                    quantile_counts: 3,
+                    population_counts: 15,
+                    trycount: 80000,
+                    proportion: 0.4
+                ]
+                """
+            }
+        }
+
+        then {
+            println "Debug: process.out = ${process.out}"
+            assertAll(
+                { assert process.success },
+                { assert process.out.gametes != null },
+                { assert process.out.gametes[0] != null },
+                { assert process.out.gametes[0][1] != null },
+                { assert path(process.out.gametes[0][1]).exists() },
+                { assert process.out.versions != null },
+                { assert process.out.versions[0] != null },
+                { assert path(process.out.versions[0]).exists() },
+                { assert snapshot(process.out.gametes[0][1].readLines()).match("params_without_useOddsRatio") },
+                { assert snapshot(process.out.versions[0].readLines()).match("versions") }
+            )
+        }
+    }
+}
+
+

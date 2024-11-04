@@ -1,2 +1,2 @@
-repository_type: pipeline
+repository_type: modules
 nf_core_version: "2.14.1"
